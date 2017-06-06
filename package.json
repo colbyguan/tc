@@ -1,0 +1,23 @@
+{
+  "name": "tc",
+  "version": "1.0.0",
+  "description": "minimal techcrunch ui",
+  "main": "server.js",
+  "license": "MIT",
+  "dependencies": {
+    "babel-cli": "6.14.0",
+    "babel-core": "6.14.0",
+    "cheerio": "latest",
+    "express": "^4.15.3",
+    "mongodb": "^2.2.28",
+    "request": "latest"
+  },
+  "devDependencies": {
+    "concurrently": "3.1.0"
+  },
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "babel-node server.js",
+    "client": "babel-node start-client.js"
+  }
+}
