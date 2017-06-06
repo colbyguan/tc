@@ -48,9 +48,11 @@ function importArticles(err, db) {
       $articleUls.each((i, elem) => {
         $(elem).find('li.river-block').each((i, elem) => {
           const document = {};
+          const $riverBlock = $(elem);
+          const href = $riverBlock.attr('data-permalink');
+          document.href = href;
           // Each block is the div containing title, excerpt, etc.
           // find() ~should~ return only 1 element;
-          const $riverBlock = $(elem);
           const $blocks = $riverBlock.find('div.block-content', 'div.block-content-brief');
           if ($blocks.length === 1) {
             const $block = $blocks.first();
@@ -59,7 +61,7 @@ function importArticles(err, db) {
             // Excerpt is not always present
             const $excerpt = $block.find('p')
             if ($excerpt.length === 1) {
-              const excerptText = $excerpt.text().substring(0, 50);
+              const excerptText = $excerpt.text().substring(0, 140);
               document.excerpt = excerptText;
             }
           }
@@ -70,6 +72,7 @@ function importArticles(err, db) {
             document.tag = tag;
           }
           if (document.title) {
+            document.category = category;
             articles.push(document);
           }
         });

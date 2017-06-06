@@ -1,0 +1,17 @@
+.is-dark .category {
+  text-decoration: line-through;
+}
+.categories-label {
+  color: white;
+}
+.category-column {
+  transition: flex-grow 0.3s, padding 0.3s;
+}
+.is-inactive {
+  padding: 0;
+  flex-grow: 0.00001;
+  visibility: hidden;
+}
+.is-inactive .card {
+  display: none;
+}
