@@ -15,3 +15,10 @@
 .is-inactive .card {
   display: none;
 }
+.hero {
+  padding: 0 20px;
+}
+.tiny-label {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
