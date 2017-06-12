@@ -1,6 +1,8 @@
 const express = require('express')
 const MongoClient = require('mongodb').MongoClient
+const schedule = require('node-schedule')
 const assert = require('assert')
+const scrape = require('./scrape')
 const app = express()
 const url = 'mongodb://localhost:27017/tc';
 const state = {
@@ -22,6 +24,10 @@ app.get('/api/all', function (req, res) {
     }
   })
 });
+
+const job = schedule.scheduleJob('* /15 * * * *', scrape);
+// Also scrape on startup
+scrape();
 
 MongoClient.connect(url, (err, db) => {
   if (err) {

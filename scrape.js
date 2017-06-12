@@ -5,8 +5,10 @@ const assert = require('assert')
 
 var url = 'mongodb://localhost:27017/tc';
 
-// Use connect method to connect to the server
-MongoClient.connect(url, importArticles);
+// Job function using connect method
+module.exports = function() {
+  MongoClient.connect(url, importArticles);
+};
 
 urls = [
   'https://techcrunch.com/popular/',
