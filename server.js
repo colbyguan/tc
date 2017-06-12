@@ -4,7 +4,7 @@ const schedule = require('node-schedule')
 const assert = require('assert')
 const scrape = require('./scrape')
 const app = express()
-const url = 'mongodb://localhost:27017/tc';
+const url = process.env.MONGODB_URI || 'mongodb://localhost:27017/tc';
 const state = {
   db: null,
   articles: []

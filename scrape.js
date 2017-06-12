@@ -3,7 +3,7 @@ const cheerio = require('cheerio')
 const MongoClient = require('mongodb').MongoClient
 const assert = require('assert')
 
-var url = 'mongodb://localhost:27017/tc';
+const url = process.env.MONGODB_URI || 'mongodb://localhost:27017/tc';
 
 // Job function using connect method
 module.exports = function() {
