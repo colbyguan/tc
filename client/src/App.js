@@ -22,11 +22,13 @@ class App extends Component {
         'social': false,
         'enterprise': false
       },
-      articles: []
+      articles: [],
+      lastModified: Date.now()
     }
     Client.getArticles((response) => {
       this.setState({
-        articles: response.result
+        articles: response.articles,
+        lastModified: response.last_modified
       });
     });
   }
@@ -138,7 +140,7 @@ class App extends Component {
             <div className="container">
               <h2 className="subtitle"><strong>tc</strong>: Techcrunch in a crunched UI</h2>
               {this.renderCategories()}
-              <div className="tiny-label">(Click to toggle categories)</div>
+              <div className="tiny-label">Click to toggle categories</div>
             </div>
           </div>
           <br />

@@ -23,7 +23,16 @@ let requestsCompleted = 0;
 function done(db) {
   requestsCompleted += 1;
   if (requestsCompleted === urls.length) {
-    db.close();
+    const collection = db.collection('meta');
+    collection.drop().then((reply) => {
+      return collection.insertOne({
+        lastModified: Date.now()
+      });
+    }).then(() => {
+      db.close();
+    }).catch((err) => {
+      console.log(err.stack);
+    });
   }
 }
 

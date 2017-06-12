@@ -6,7 +6,8 @@ const scrape = require('./scrape')
 const app = express()
 const url = 'mongodb://localhost:27017/tc';
 const state = {
-  db: null
+  db: null,
+  articles: []
 };
 
 app.set('port', (process.env.PORT || 3001));
@@ -15,17 +16,20 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.get('/api/all', function (req, res) {
-  const collection = state.db.collection('articles');
-  collection.find({}).toArray((err, docs) => {
-    if (err) {
-      res.status(500).json({error: err});
-    } else {
-      res.json({result: docs});
-    }
-  })
+  const articles = state.db.collection('articles');
+  const meta = state.db.collection('meta');
+  articles.find({}).toArray().then((docs) => {
+    state.articles = docs;
+    return meta.findOne({}, {});
+  }).then((doc) => {
+    res.json({articles: state.articles, lastModified: doc.lastModified});
+  }).catch((err) => {
+    console.log(err.stack);
+    res.status(500).json({error: err});
+  });
 });
 
-const job = schedule.scheduleJob('* /15 * * * *', scrape);
+const job = schedule.scheduleJob('*/15 * * * *', scrape);
 // Also scrape on startup
 scrape();
 
