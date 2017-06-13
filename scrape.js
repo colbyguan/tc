@@ -24,9 +24,9 @@ function done(db) {
   requestsCompleted += 1;
   if (requestsCompleted === urls.length) {
     const collection = db.collection('meta');
-    db.collections().then((collections) => {
-      if (collections.indexOf('meta') !== -1) {
-        return collections.drop();
+    db.listCollections({name: 'meta'}).toArray().then((collections) => {
+      if (collections.length === 1) {
+        return collection.drop();
       } else {
         return null;
       }
@@ -48,9 +48,9 @@ function importArticles(err, db) {
   console.log("Connected successfully to mongodb");
   const collection = db.collection('articles');
   // Import from blank table
-  db.collections().then((collections) => {
-    if (collections.indexOf('articles') !== -1) {
-      return collections.drop();
+  db.listCollections({name: 'articles'}).toArray().then((collections) => {
+    if (collections.length === 1) {
+      return collection.drop();
     } else {
       return null;
     }
