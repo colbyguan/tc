@@ -1,16 +1,56 @@
-tr {
-  font-size: 1rem;
+.article-row {
+  height: 110px;
+  transition: all 0.3s;
 }
-.card-content {
-  padding: 0.5rem;
+.table .article-row:hover {
+  background-color: #E3F2FD;
 }
-.excerpt {
-  font-size: 0.8rem;
-  opacity: 0.8;
+.article-row:hover td:first-child {
+  border-width: 0 0 2px 2px;
+  border-color: white white #dbdbdb #3e8ab2;
+}
+.article-row:hover td:last-child {
+  border-width: 0 2px 2px 0;
+  border-color: white #3e8ab2 #dbdbdb white;
+}
+.article-row td {
+  vertical-align: middle;
+  border: 2px solid #dbdbdb;
+  transition: all 0.3s;
+}
+.article-row td:first-child {
+  border-color: white white #dbdbdb;
+  border-width: 0 0 2px 2px;
+}
+.article-row td:last-child {
+  border-color: white white #dbdbdb;
+  border-width: 0 2px 2px 0;
+}
+.flat-card {
+  max-width: 100%;
+  position: relative;
+}
+.flat-card-title {
+  font-weight: 700;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #dbdbdb;
 }
 .table .rank {
   padding: 0.5em 0 0.5em 0.75em;
 }
 .article-link {
-  color: #4CAF50;
+  color: #3e8ab2;
+  font-weight: 700;
+  font-size: 1rem;
+}
+.article-info {
+  margin-top: 4px;
+  font-size: 0.75rem;
+  color: #757575;
+}
+.article-tag {
+  padding: 2px 4px;
+  border-radius: 2px;
+  color: #3e8ab2;
+  border: 1px solid #3e8ab2;
 }

@@ -88,62 +88,54 @@ class App extends Component {
   }
   renderCategory(category, i) {
     return (
-      <p key={i} className="control">
-        <a className={"button " + (this.state.categories[category] ? '': 'is-dark')}
-          onClick={() => this.toggleCategory(category)}>
-          <span className="category">
-            {category.charAt(0).toUpperCase() + category.slice(1)}
-          </span>
-        </a>
-      </p>
+      <li key={i}><a className={!this.state.categories[category] ? 'inactive': ''} onClick={() => this.toggleCategory(category)}>
+        {category.charAt(0).toUpperCase() + category.slice(1)}
+      </a></li>
     );
   }
   renderCategories() {
-    const mid = Math.floor(allCategories.length / 2);
-    const firstHalf = allCategories.slice(0, mid);
-    const secondHalf = allCategories.slice(mid, allCategories.length);
     return (
-      <div>
-        <div className="field has-addons is-hidden-mobile">
+      <div className="flat-tabs">
+        <ul>
           {allCategories.map(this.renderCategory.bind(this))}
-        </div>
-        <div className="field has-addons is-hidden-tablet">
-          {firstHalf.map(this.renderCategory.bind(this))}
-        </div>
-        <div className="field has-addons is-hidden-tablet">
-          {secondHalf.map(this.renderCategory.bind(this))}
-        </div>
+        </ul>
       </div>
     );
   }
   renderListings() {
     const columns = [];
+    let hitFirst = false;
     allCategories.forEach((category, i) => {
       const inactive = !this.state.categories[category];
       const articles = this.state.articles.filter((article) => {
         return article.category === category;
       });
       columns.push(
-        <div key={category} className={"column category-column " + (inactive ? 'is-inactive': '')}>
-          <Listing  category={category} articles={articles} />
+        <div key={category} className={"column " +
+          (this.state.maxCategories !== 1 ? 'category-column ' : '') +
+          (hitFirst ? 'left-border ' : '') +
+          (inactive ? 'is-inactive': '')}>
+          <Listing category={category} articles={articles} />
         </div>
       );
+      if (!inactive) {
+        hitFirst = true;
+      }
     });
     return columns;
   }
   render() {
     return (
       <div className="App">
-        <section className="hero is-success is-bold is-fullwidth">
-          <br />
-          <div className="hero-foot">
-            <div className="container">
-              <h2 className="subtitle"><strong>tc</strong>: Techcrunch in a crunched UI</h2>
-              {this.renderCategories()}
-              <div className="tiny-label">Click to toggle categories</div>
-            </div>
+        <section className="section top">
+          <div className="container">
+            <h2 className="subtitle">tc: Techcrunch in a crunched UI</h2>
           </div>
-          <br />
+        </section>
+        <section className="section categories">
+          <div className="container">
+            {this.renderCategories()}
+          </div>
         </section>
         <section className="section">
           <div className="container">

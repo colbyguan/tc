@@ -81,16 +81,20 @@ function importArticles(err, db) {
               const title = $block.find('h2 a').text();
               document.title = title;
               // Excerpt is not always present
-              const $excerpt = $block.find('p')
+              const $excerpt = $block.find('p');
               if ($excerpt.length === 1) {
                 const excerptText = $excerpt.text().substring(0, 140);
                 document.excerpt = excerptText;
+              }
+              const $time = $block.find('.byline .timestamp');
+              if ($time.length === 1) {
+                document.time = $time.text().trim();
               }
             }
             // Tag is not always present
             const $tags = $riverBlock.find('div.tags a span')
             if ($tags.length === 1) {
-              const tag = $tags.text();
+              const tag = $tags.text().trim();
               document.tag = tag;
             }
             if (document.title) {

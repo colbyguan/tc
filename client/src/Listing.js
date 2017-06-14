@@ -6,28 +6,25 @@ class Listing extends Component {
   render() {
     const articles = this.props.articles;
     const articleRows = articles.map((article, idx) => (
-      <tr key={idx}>
+      <tr className="article-row" key={idx}>
         <td className="rank">{idx+1}</td>
         <td><a className="article-link" href={article.href}>{article.title}</a>
-          {article.excerpt && <p className="excerpt">{article.excerpt.substring(0, 100)}...</p>}
+        <p className="article-info">
+          {article.tag && <span className="article-tag">{article.tag}</span>} posted <span className="article-time">{article.time}</span></p>
         </td>
       </tr>
     ))
     return (
-      <div className="card">
-        <header className="card-header">
-          <p className="card-header-title">
+      <div className="flat-card">
+          <p className="flat-card-title">
             {this.props.category}
           </p>
-        </header>
-        <div className="card-content">
-          <table className="table is-striped">
+          <table className="table">
             <tbody>
               {articleRows}
             </tbody>
           </table>
         </div>
-      </div>
     )
   }
 }
