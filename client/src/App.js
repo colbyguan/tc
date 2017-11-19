@@ -14,15 +14,51 @@ class App extends Component {
          text doesn't get too squished */
       currCategory: 'popular',
       articles: [],
-      lastModified: Date.now()
+      lastModified: Date.now(),
+      useSidebar: true,
+      showMoreIndicator: false,
     }
     Client.getArticles((response) => {
       this.setState({
         articles: response.articles,
         lastModified: response.last_modified
       });
-      console.log(response.articles);
     });
+  }
+  componentWillMount() {
+    this.updateBar();
+  }
+  componentDidMount() {
+    window.addEventListener('resize', this.updateBar.bind(this));
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateBar.bind(this));
+  }
+  updateBar() {
+    console.log('firing')
+    var w = window,
+        d = document,
+        documentElement = d.documentElement,
+        body = d.getElementsByTagName('body')[0],
+        width = w.innerWidth || documentElement.clientWidth || body.clientWidth;
+    if (width < 625) {
+      this.setState({
+        showMoreIndicator: true
+      })
+    } else {
+      this.setState({
+        showMoreIndicator: false
+      })
+    }
+    if (width < 890) {
+      this.setState({
+        useSidebar: false
+      });
+    } else {
+      this.setState({
+        useSidebar: true
+      });
+    }
   }
   toggleCategory(category) {
     this.setState({
@@ -37,11 +73,14 @@ class App extends Component {
     );
   }
   renderCategories() {
+    console.log(this.state.showMoreIndicator);
     return (
-      <div className="flat-tabs">
+      <div id="flat-tabs" className="flat-tabs">
         <ul>
           {allCategories.map(this.renderCategory.bind(this))}
         </ul>
+        {this.state.showMoreIndicator && <div className="more-indicator">
+        </div> }
       </div>
     );
   }
@@ -56,8 +95,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <section className={"section topbar-container " + (!this.state.useSidebar ? 'show': 'hidden')}>
+          <div className="topbar">
+            <h2>tc</h2>
+            <h3>TechCrunch in a crunched UI</h3>
+            {this.renderCategories()}
+          </div>
+        </section>
         <section className="section">
-          <div className="columns">
+          <div className={"columns " + (this.state.useSidebar ? 'show': 'hidden')}>
             <div className="column is-2 sidebar-column">
               <div className="sidebar">
                 <h2>tc</h2>

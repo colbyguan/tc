@@ -1,6 +1,8 @@
 .article-row {
-  height: 110px;
   transition: all 0.3s;
+}
+.table td.article-block {
+  padding: 1em 0.75em;
 }
 .table .article-row:hover {
   background-color: #E3F2FD;

@@ -36,23 +36,58 @@
   padding: 0.5rem 1.5rem;
   max-width: 200px;
 }
-.sidebar h2 {
+.sidebar h2, .topbar h2 {
   color: white;
   font-weight: 700;
   font-size: 2rem;
 }
-.sidebar h3 {
+.sidebar h3, .topbar h3 {
   color: grey;
+}
+.topbar h2, .topbar h3 {
+  display: inline-block;
+}
+.topbar h3 {
+  margin-left: 8px;
+}
+.topbar {
+  padding: 1em 2em 0.5em;
+  position: fixed;
+  width: 100%;
+  background-color: #212121;
+  z-index: 99;
+}
+.more-indicator {
+  position: fixed;
+  height: 40px;
+  width: 100px;
+  right: 28px;
+  top: 55px;
+  padding: 0 8px;
+  font-weight: 700;
+  color: #8eb661;
+  background: linear-gradient(to right, rgba(33, 33, 33, 0), rgba(33, 33, 33, 1));
 }
 .flat-tabs {
   display: flex;
+}
+.sidebar .flat-tabs {
   flex-direction: column;
   justify-content: center;
   align-items: left;
   height: calc(100% - 300px);
 }
+.topbar .flat-tabs {
+  overflow-x: scroll;
+  position: relative;
+}
+.topbar .flat-tabs ul {
+  padding-right: 50px;
+}
 .flat-tabs ul {
   display: flex;
+}
+.sidebar .flat-tabs ul {
   flex-direction: column;
   justify-content: flex-start;
 }
@@ -73,4 +108,13 @@
 .listings .box {
   border-radius: 0;
   margin-right: 10px;
+}
+.columns.hidden {
+  padding-top: 100px;
+}
+.hidden .sidebar-column, .hidden.section{
+  display: none;
+}
+.hidden .listings .box {
+  margin-left: 10px;
 }

@@ -8,7 +8,7 @@ class Listing extends Component {
     const articleRows = articles.map((article, idx) => (
       <tr className="article-row" key={idx}>
         <td className="rank">{idx+1}</td>
-        <td>
+        <td className="article-block">
           <p className="article-info">
             {article.tag && <span className="article-tag">{article.tag}</span>} &mdash; <span className="article-time">{article.time}</span>
           </p>
@@ -16,7 +16,7 @@ class Listing extends Component {
             <a href={article.href}>{article.title}</a>
           </div>
           <p className="article-excerpt">
-            {article.excerpt}
+            {article.excerpt.substring(0, 300) + '..'}
           </p>
         </td>
       </tr>
