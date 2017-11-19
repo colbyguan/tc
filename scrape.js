@@ -83,7 +83,10 @@ function importArticles(err, db) {
               // Excerpt is not always present
               const $excerpt = $block.find('p');
               if ($excerpt.length === 1) {
-                const excerptText = $excerpt.text().substring(0, 140);
+                let excerptText = $excerpt.text();
+                if (excerptText.endsWith('Read' + String.fromCharCode(160) + 'More')) {
+                  excerptText = excerptText.slice(0, -10);
+                }
                 document.excerpt = excerptText;
               }
               const $time = $block.find('.byline .timestamp');
@@ -92,7 +95,7 @@ function importArticles(err, db) {
               }
             }
             // Tag is not always present
-            const $tags = $riverBlock.find('div.tags a span')
+            const $tags = $riverBlock.find('div.tags a span');
             if ($tags.length === 1) {
               const tag = $tags.text().trim();
               document.tag = tag;

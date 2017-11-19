@@ -21,6 +21,7 @@ class App extends Component {
         articles: response.articles,
         lastModified: response.last_modified
       });
+      console.log(response.articles);
     });
   }
   toggleCategory(category) {
@@ -30,7 +31,7 @@ class App extends Component {
   }
   renderCategory(category, i) {
     return (
-      <li key={i}><a className={category != this.state.currCategory ? 'inactive': ''} onClick={() => this.toggleCategory(category)}>
+      <li key={i}><a className={category !== this.state.currCategory ? 'inactive': ''} onClick={() => this.toggleCategory(category)}>
         {category.charAt(0).toUpperCase() + category.slice(1)}
       </a></li>
     );

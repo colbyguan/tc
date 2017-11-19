@@ -8,9 +8,16 @@ class Listing extends Component {
     const articleRows = articles.map((article, idx) => (
       <tr className="article-row" key={idx}>
         <td className="rank">{idx+1}</td>
-        <td><a className="article-link" href={article.href}>{article.title}</a>
-        <p className="article-info">
-          {article.tag && <span className="article-tag">{article.tag}</span>} posted <span className="article-time">{article.time}</span></p>
+        <td>
+          <p className="article-info">
+            {article.tag && <span className="article-tag">{article.tag}</span>} &mdash; <span className="article-time">{article.time}</span>
+          </p>
+          <div className="article-link">
+            <a href={article.href}>{article.title}</a>
+          </div>
+          <p className="article-excerpt">
+            {article.excerpt}
+          </p>
         </td>
       </tr>
     ))

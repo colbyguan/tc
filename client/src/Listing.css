@@ -39,18 +39,18 @@
   padding: 0.5em 0 0.5em 0.75em;
 }
 .article-link {
-  color: #3e8ab2;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  margin: 4px 0;
+}
+.article-link a {
+  color: #3e8ab2;
 }
 .article-info {
-  margin-top: 4px;
   font-size: 0.75rem;
   color: #757575;
 }
-.article-tag {
-  padding: 2px 4px;
-  border-radius: 2px;
-  color: #3e8ab2;
-  border: 1px solid #3e8ab2;
+.article-excerpt {
+  font-size: 0.8rem;
+  opacity: 0.8;
 }
