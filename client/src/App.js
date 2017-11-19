@@ -127,20 +127,19 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <section className="section top">
-          <div className="container">
-            <h2 className="subtitle">tc: Techcrunch in a crunched UI</h2>
-          </div>
-        </section>
-        <section className="section categories">
-          <div className="container">
-            {this.renderCategories()}
-          </div>
-        </section>
         <section className="section">
-          <div className="container">
-            <div className="columns">
-              {this.renderListings()}
+          <div className="columns">
+            <div className="column is-2 sidebar-column">
+              <div className="sidebar">
+                <h2>tc</h2>
+                <h3>TechCrunch in a crunched UI</h3>
+                {this.renderCategories()}
+              </div>
+            </div>
+            <div className="column">
+              <div className="box">
+                {this.renderListings()}
+              </div>
             </div>
           </div>
         </section>
