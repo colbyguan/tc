@@ -1,3 +1,4 @@
+require('newrelic')
 const express = require('express')
 const MongoClient = require('mongodb').MongoClient
 const schedule = require('node-schedule')
